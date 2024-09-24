@@ -5,7 +5,7 @@ Student Number:  133682229
 Student Email:  makoyes@myseneca.ca
 Date Created:  2024-09023
 
-GITHUB URL:  
+GITHUB URL:  https://github.com/arafdewann
 VERCEL URL:   
 
 ### Technology Stack
