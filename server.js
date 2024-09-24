@@ -1,22 +1,11 @@
-const express = require('express'); // "require" the Express module
-const app = express(); // obtain the "app" object
-const HTTP_PORT = process.env.PORT || 3000; // assign a port
+const express = require('express');
+const app = express();
+const HTTP_PORT = process.env.PORT || 3000;
 
-// get index Route - Display your full name and student number
 app.get('/', (req, res) => {
-  res.send("MD ARAFAT KOYES - 123456789");
+  res.send('MD ARAFAT KOYES - 123456789');
 });
 
-// get contact Route
-app.get('/contact', (req, res) => {
-  res.send("Contact Page");
+app.listen(HTTP_PORT, () => {
+  console.log(`Server is running on port ${HTTP_PORT}`);
 });
-
-// get about Route
-app.get('/about', (req, res) => {
-  res.send("About Page");
-});
-
-// start the server on the port and output a confirmation to the console
-app.listen(HTTP_PORT, () => console.log(`server listening on: ${HTTP_PORT}`));
-
