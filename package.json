@@ -1,0 +1,14 @@
+{
+  "name": "web322-assignments",
+  "version": "1.0.0",
+  "description": "1st Assignment",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MD ARAFAT KOYES",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
