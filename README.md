@@ -29,7 +29,7 @@ VERCEL URL:
 **Database**: TBD  
 
 <p align="center">
-  <img src="https://github.com/arafdewann/AS2/blob/main/cms.png" alt="CMS" width="650"/>
+  <img src="https://github.com/arafdewann/Web322-Assignments/blob/main/public/favicon.ico" alt="CMS" width="650"/>
 </p>
 
 <p align="center"><strong>CMS</strong></p>
