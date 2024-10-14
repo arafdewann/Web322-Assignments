@@ -24,6 +24,10 @@ Date Created:  2024-09023
 GITHUB URL:  https://github.com/arafdewann
 VERCEL URL:https://vercel.com/arafdewanns-projects/web322-assignments/3PU9soYHVBMxBf6haEoRfYAXrjRc   
 
+AS2: https://vercel.com/arafdewanns-projects/web322-assignments/DqcwLCVnrAY6pfDMcMgYHWkWBHR8
+https://vercel.live/link/web322-assignments-amber.vercel.app?via=project-dashboard-alias-list&p=1
+https://vercel.live/link/web322-assignments-git-main-arafdewanns-projects.vercel.app?via=project-dashboard-alias-list&p=1
+
 
 ### Technology Stack
 
