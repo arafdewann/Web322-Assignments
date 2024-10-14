@@ -39,7 +39,7 @@ VERCEL URL:https://vercel.com/arafdewanns-projects/web322-assignments/3PU9soYHVB
 
 <<<<<<< HEAD
 <p align="center">
-  <img src="https://github.com/arafdewann/AS2/blob/main/cms.png" alt="CMS" width="650"/>
+  <img src="https://github.com/arafdewann/Web322-Assignments/blob/main/cms.png" alt="CMS" width="650"/>
 </p>
 
 <p align="center"><strong>CMS</strong></p>
