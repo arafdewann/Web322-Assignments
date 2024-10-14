@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CMS Web Blog by MD ARAFAT KOYES
 
 
@@ -12,15 +13,24 @@ github: https://github.com/arafdewann/AS2
 
 
 
+=======
+>>>>>>> 88797b9ad9bcd0ed49bff9f511612944e7206902
 # Web322 Assignment
 
 Student Name:  MD ARAFAT KOYES
 Student Number:  133682229
 Student Email:  makoyes@myseneca.ca
+<<<<<<< HEAD
 Date Created:  
 
 GITHUB URL:  https://github.com/arafdewann
 VERCEL URL: 
+=======
+Date Created:  2024-09023
+
+GITHUB URL:  https://github.com/arafdewann
+VERCEL URL:https://vercel.com/arafdewanns-projects/web322-assignments/3PU9soYHVBMxBf6haEoRfYAXrjRc   
+>>>>>>> 88797b9ad9bcd0ed49bff9f511612944e7206902
 
 ### Technology Stack
 
@@ -28,9 +38,15 @@ VERCEL URL:
 **Backend**: TBD  
 **Database**: TBD  
 
+<<<<<<< HEAD
 <p align="center">
   <img src="https://github.com/arafdewann/AS2/blob/main/cms.png" alt="CMS" width="650"/>
 </p>
 
 <p align="center"><strong>CMS</strong></p>
 
+=======
+### Notes
+
+By submitting this as my assignment, I declare that this assignment is my own work in accordance with Seneca Academic Policy. No part of this assignment has been copied manually or electronically from any other source (including web sites) or distributed to other students.
+>>>>>>> 88797b9ad9bcd0ed49bff9f511612944e7206902
