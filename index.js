@@ -13,13 +13,14 @@ contentService
   .then(() => {
     console.log("Content service initialized");
 
+    // Serve 'about.html' from the root route
     app.get("/", (req, res) => {
-      res.sendFile(path.join(__dirname, "views", "home.html")); 
+      res.sendFile(path.join(__dirname, "views", "about.html")); 
     });
 
-    // Serve 'about.html' from the 'views' folder
+    // Serve 'about.html' from the '/about' route
     app.get("/about", (req, res) => {
-      res.sendFile(path.join(__dirname, "views", "about.html")); // {{ edit_2 }}
+      res.sendFile(path.join(__dirname, "views", "about.html")); // Updated to serve 'about.html'
     });
 
     app.get("/articles", (req, res) => {
@@ -44,11 +45,10 @@ contentService
         });
     });
 
-
-    // ... existing code ...
-app.get("/favicon.ico", (req, res) => {
-  res.status(204).end(); // {{ edit_1 }}
-})
+    // Favicon request handler
+    app.get("/favicon.ico", (req, res) => {
+      res.status(204).end(); // {{ edit_1 }}
+    });
 
     app.listen(port, () => {
       console.log(`Express http server listening on port ${port}`);
