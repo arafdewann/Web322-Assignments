@@ -3,7 +3,7 @@
 
 
 This is a simple Content Management System (CMS) web application built with **Node.js**, **Express**, and **Bootstrap 5**. It features basic routes for handling articles and categories and serves static files like HTML, CSS, and images.
-github: https://github.com/arafdewann/AS2
+github: https://github.com/arafdewann/Web322-Assignments
 ## Features
 
 - Responsive layout using Bootstrap 5.
