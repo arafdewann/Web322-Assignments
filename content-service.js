@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 
 let articles = [];
 let categories = [];
@@ -6,15 +7,16 @@ let categories = [];
 module.exports = {
   initialize: function () {
     return new Promise((resolve, reject) => {
-      fs.readFile("./data/articles.json", "utf8", (err, data) => {
+      // Use path.join for cross-environment compatibility
+      fs.readFile(path.join(__dirname, "data", "articles.json"), "utf8", (err, data) => {
         if (err) {
-          reject("unable to read file");
+          reject("Unable to read articles.json file");
         } else {
           articles = JSON.parse(data);
 
-          fs.readFile("./data/categories.json", "utf8", (err, data) => {
+          fs.readFile(path.join(__dirname, "data", "categories.json"), "utf8", (err, data) => {
             if (err) {
-              reject("unable to read file");
+              reject("Unable to read categories.json file");
             } else {
               categories = JSON.parse(data);
               resolve();
@@ -32,7 +34,7 @@ module.exports = {
       if (publishedArticles.length > 0) {
         resolve(publishedArticles);
       } else {
-        reject("no results returned");
+        reject("No published articles found");
       }
     });
   },
@@ -41,7 +43,7 @@ module.exports = {
       if (categories.length > 0) {
         resolve(categories);
       } else {
-        reject("no results returned");
+        reject("No categories found");
       }
     });
   },
