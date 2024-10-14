@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-const port = 3243;
+const path = require("path");
+const port = process.env.PORT || 3243;
 const contentService = require("./content-service");
 
 app.use(express.static("public"));
@@ -11,16 +12,17 @@ contentService
   .then(() => {
     console.log("Content service initialized");
 
+    // Redirect root to home
     app.get("/", (req, res) => {
       res.redirect("/home");
     });
 
-
     // Serve 'about.html' from the 'views' folder
     app.get("/about", (req, res) => {
-      res.sendFile(__dirname + "/views/about.html");
+      res.sendFile(path.join(__dirname, "views", "about.html"));
     });
 
+    // Serve articles
     app.get("/articles", (req, res) => {
       contentService
         .getPublishedArticles()
@@ -28,10 +30,11 @@ contentService
           res.json(articles);
         })
         .catch((err) => {
-          res.json({ message: err });
+          res.status(500).json({ message: err });
         });
     });
 
+    // Serve categories
     app.get("/categories", (req, res) => {
       contentService
         .getCategories()
@@ -39,10 +42,11 @@ contentService
           res.json(categories);
         })
         .catch((err) => {
-          res.json({ message: err });
+          res.status(500).json({ message: err });
         });
     });
 
+    // Start server
     app.listen(port, () => {
       console.log(`Express http server listening on port ${port}`);
     });
