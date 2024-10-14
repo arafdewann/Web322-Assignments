@@ -1,9 +1,8 @@
 
 # CMS Web Blog by MD ARAFAT KOYES
 
-
 This is a simple Content Management System (CMS) web application built with **Node.js**, **Express**, and **Bootstrap 5**. It features basic routes for handling articles and categories and serves static files like HTML, CSS, and images.
-github: https://github.com/arafdewann/AS2
+github: https://github.com/arafdewann/Web322-Assignments
 ## Features
 
 - Responsive layout using Bootstrap 5.
@@ -32,7 +31,7 @@ VERCEL URL:https://vercel.com/arafdewanns-projects/web322-assignments/3PU9soYHVB
 **Database**: TBD  
 
 <p align="center">
-  <img src="https://github.com/arafdewann/AS2/blob/main/cms.png" alt="CMS" width="650"/>
+  <img src="https://github.com/arafdewann/Web322-Assignments/blob/main/cms.png" alt="CMS" width="650"/>
 </p>
 
 <p align="center"><strong>CMS</strong></p>
