@@ -37,3 +37,6 @@ https://vercel.live/link/web322-assignments-git-main-arafdewanns-projects.vercel
 
 <p align="center"><strong>CMS</strong></p>
 
+## Notes
+By submitting this as my assignment, I declare that this assignment is my own work in accordance with Seneca Academic Policy. No part of this assignment has been copied manually or electronically from any other source (including web sites) or distributed to other students.
+
