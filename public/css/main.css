@@ -1,0 +1,122 @@
+/* General body and text styling */
+body {
+    background-color: #f0f8ff; /* Light blue background */
+    color: #333; /* Dark text for readability */
+}
+
+h1, h2 {
+    color: #003366; /* Dark blue color for headings */
+}
+
+/* Navbar styling */
+.navbar-dark.bg-dark-blue {
+    background-color: #00274d; /* Dark blue background for the navbar */
+}
+
+.navbar-brand, .nav-link {
+    color: #fff; /* White text for navbar links and brand */
+}
+
+/* Hover effect for navigation links */
+.nav-link:hover {
+    color: #00bfff; /* Light blue hover effect for navbar links */
+    text-decoration: underline; /* Underline links on hover */
+}
+
+/* Footer styling */
+footer.bg-dark-blue {
+    background-color: #00274d; /* Dark blue background for the footer */
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Main section styling */
+main {
+    margin-top: 50px;
+}
+
+/* Centering the image stack */
+.image-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Image stacking with hover effect */
+.stack-img {
+    width: 100%;
+    max-width: 300px; /* Adjust max-width as needed */
+    transition: transform 0.3s ease-in-out;
+}
+
+.stack-img:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Service Section styling */
+
+/* Card styling */
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for cards */
+    transition: all 0.3s ease-in-out;
+    height: 100%; /* Ensure card takes up full height for alignment */
+}
+
+.card:hover {
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+/* Card image styling for uniform size */
+.card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-img-top:hover {
+    transform: scale(1.05);
+}
+
+/* Card body (content inside the card) */
+.card-body {
+    padding: 20px;
+}
+
+/* Card title */
+.card-title {
+    font-size: 1.25rem;
+    color: #003366;
+    margin-bottom: 15px;
+}
+
+/* Card text */
+.card-text {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Button styling inside cards */
+.btn-primary {
+    background-color: #003366;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #00bfff;
+    border: none;
+}
+

@@ -1,14 +1,16 @@
 {
-  "name": "web322-assignments",
+  "name": "as2-p1s3",
   "version": "1.0.0",
-  "description": "1st Assignment",
-  "main": "server.js",
+  "description": "This is a simple Content Management System (CMS) web application built with **Node.js**, **Express**, and **Bootstrap 5**. It features basic routes for handling articles and categories and serves static files like HTML, CSS, and images.",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "MD ARAFAT KOYES",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.0"
-  }
+    "as2-p1s3": "file:",
+    "express": "^4.21.1"
+  },
+  "keywords": []
 }
