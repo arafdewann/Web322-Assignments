@@ -12,12 +12,27 @@ Live Link:
 - Serves static content like CSS, images, and HTML files.
 - Backend logic to load and serve content using a custom content service.
 
-## Installation
+# Web322 Assignment
 
-1. Clone the repository or download the project files.
-2. Open the project directory in your terminal.
+Student Name:  MD ARAFAT KOYES
+Student Number:  133682229
+Student Email:  makoyes@myseneca.ca
+Date Created:  
 
-### Install dependencies:
-```bash
-npm install
-"# test" 
+GITHUB URL:  https://github.com/arafdewann
+VERCEL URL: 
+
+### Technology Stack
+
+**Frontend**:    
+**Backend**: TBD  
+**Database**: TBD  
+
+<p align="center">
+  <img src="https://github.com/arafdewann/AS2/blob/main/cms.png" alt="CMS" width="650"/>
+</p>
+
+<p align="center"><strong>CMS</strong></p>
+
+
+
