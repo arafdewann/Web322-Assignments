@@ -20,7 +20,10 @@ Student Email:  makoyes@myseneca.ca
 Date Created:  
 
 GITHUB URL:  https://github.com/arafdewann
-VERCEL URL: 
+VERCEL URL: https://vercel.com/arafdewanns-projects/web322-assignments/3PU9soYHVBMxBf6haEoRfYAXrjRc  (AS1)
+AS2: https://vercel.com/arafdewanns-projects/web322-assignments/Cp85NFRyX8ahXYUgaRa8TfEodkES
+https://vercel.live/link/web322-assignments-arafdewanns-projects.vercel.app?via=project-dashboard-alias-list&p=1
+https://vercel.live/link/web322-assignments-git-main-arafdewanns-projects.vercel.app?via=project-dashboard-alias-list&p=1
 
 ### Technology Stack
 
@@ -29,7 +32,7 @@ VERCEL URL:
 **Database**: TBD  
 
 <p align="center">
-  <img src="https://github.com/arafdewann/Web322-Assignments/blob/main/public/images/CONTENT.png" alt="CMS" width="650"/>
+  <img src="https://github.com/arafdewann/Web322-Assignments/blob/main/public/images/CONTENT.png" alt="CMS" width="520"/>
 </p>
 
 <p align="center"><strong>CMS</strong></p>
