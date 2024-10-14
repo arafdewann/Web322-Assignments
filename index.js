@@ -17,6 +17,11 @@ contentService
       res.redirect("/home");
     });
 
+    // Serve 'home.html' from the 'views' folder
+    app.get("/home", (req, res) => {
+      res.sendFile(path.join(__dirname, "views", "home.html"));
+    });
+
     // Serve 'about.html' from the 'views' folder
     app.get("/about", (req, res) => {
       res.sendFile(path.join(__dirname, "views", "about.html"));
@@ -44,6 +49,11 @@ contentService
         .catch((err) => {
           res.status(500).json({ message: err });
         });
+    });
+
+    // Handle 404 errors
+    app.use((req, res) => {
+      res.status(404).send("Page not found");
     });
 
     // Start server
