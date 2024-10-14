@@ -6,7 +6,7 @@ Student Email:  makoyes@myseneca.ca
 Date Created:  2024-09023
 
 GITHUB URL:  https://github.com/arafdewann
-VERCEL URL:   
+VERCEL URL:https://vercel.com/arafdewanns-projects/web322-assignments/3PU9soYHVBMxBf6haEoRfYAXrjRc   
 
 ### Technology Stack
 
