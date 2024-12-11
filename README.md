@@ -11,6 +11,8 @@ Live Link: https://web322-assignments-git-main-arafdewanns-projects.vercel.app/
 - Routes for fetching articles and categories in JSON format.
 - Serves static content like CSS, images, and HTML files.
 - Backend logic to load and serve content using a custom content service.
+- SQL SERVER SETUP & NEONTECH
+- Edit Option Added
 
 # Web322 Assignment
 
@@ -33,6 +35,11 @@ https://cm-sproject-git-main-arafdewanns-projects.vercel.app/
 AS4: https://web322-assignments-amber.vercel.app/
 https://web322-assignments-arafdewanns-projects.vercel.app/
 https://web322-assignments-git-main-arafdewanns-projects.vercel.app/
+
+AS4: https://web322-assignments-amber.vercel.app/
+https://web322-assignments-arafdewanns-projects.vercel.app/
+https://web322-assignments-git-main-arafdewanns-projects.vercel.app/
+-- Final version of the project 
 
 ### Technology Stack
 
