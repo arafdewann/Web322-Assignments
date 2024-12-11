@@ -17,8 +17,8 @@ Live Link: https://web322-assignments-git-main-arafdewanns-projects.vercel.app/
 # Web322 Assignment
 
 Student Name:  MD ARAFAT KOYES
-Student Number:  133682229
-Student Email:  makoyes@myseneca.ca
+- Student Number:  133682229
+- Student Email:  makoyes@myseneca.ca
 Date Created:  
 
 GITHUB URL:  https://github.com/arafdewann/Web322-Assignments
