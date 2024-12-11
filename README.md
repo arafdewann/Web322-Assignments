@@ -21,7 +21,7 @@ Student Number:  133682229
 Student Email:  makoyes@myseneca.ca
 Date Created:  
 
-GITHUB URL:  https://github.com/arafdewann
+GITHUB URL:  https://github.com/arafdewann/Web322-Assignments
 VERCEL URL: https://vercel.com/arafdewanns-projects/web322-assignments/3PU9soYHVBMxBf6haEoRfYAXrjRc  (AS1)
 - AS2 LINKS
 AS2: https://vercel.com/arafdewanns-projects/web322-assignments/Cp85NFRyX8ahXYUgaRa8TfEodkES
