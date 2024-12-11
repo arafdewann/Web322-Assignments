@@ -1,107 +1,134 @@
-const path = require("path");
-const fs = require("fs").promises;
+require("dotenv").config(); // Load environment variables from the .env file
 
-let articles = [];
-let categories = [];
+const { Pool } = require("pg");
+
+// Initialize the PostgreSQL connection pool
+const pool = new Pool({
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+  ssl: { rejectUnauthorized: false }, // Required for Neon.tech
+});
 
 module.exports = {
+  // Initialize database connection
   initialize: async function () {
     try {
-      const articlesPath = path.join(__dirname, "data", "articles.json");
-      const categoriesPath = path.join(__dirname, "data", "categories.json");
-
-      const articlesData = await fs.readFile(articlesPath, "utf8");
-      articles = JSON.parse(articlesData);
-
-      const categoriesData = await fs.readFile(categoriesPath, "utf8");
-      categories = JSON.parse(categoriesData);
+      console.log("Database initialized.");
     } catch (err) {
-      throw new Error(
-        "Unable to read file: " +
-          err.message +
-          ". Please ensure the file exists."
-      );
+      throw new Error("Unable to initialize database: " + err.message);
     }
   },
+
+  // Fetch all published articles from the database
   getPublishedArticles: function () {
-    return new Promise((resolve, reject) => {
-      const publishedArticles = articles.filter(
-        (article) => article.published === true
-      );
-      if (publishedArticles.length > 0) {
-        resolve(publishedArticles);
-      } else {
-        reject(new Error("No results returned"));
-      }
-    });
+    return pool
+      .query("SELECT * FROM articles WHERE published = true")
+      .then((res) => res.rows)
+      .catch((err) => Promise.reject("No results returned"));
   },
+
+  // Fetch all categories from the database
   getCategories: function () {
-    return new Promise((resolve, reject) => {
-      if (categories.length > 0) {
-        resolve(categories);
-      } else {
-        reject(new Error("No results returned"));
-      }
-    });
+    return pool
+      .query("SELECT * FROM categories")
+      .then((res) => res.rows)
+      .catch((err) => Promise.reject("No results returned"));
   },
 
+  // Add a new article to the database
   addArticle: function (articleData) {
-    articleData.published = !!articleData.published ? true : false; // Ensures published is a boolean
-    articleData.id = articles.length + 1;
-    articles.push(articleData);
-    return articleData;
+    const { title, content, categoryId, published } = articleData;
+    const query = `
+      INSERT INTO articles (title, content, category_id, published)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
+    `;
+    const values = [title, content, categoryId, published];
+    return pool
+      .query(query, values)
+      .then((res) => res.rows[0])
+      .catch((err) => Promise.reject("Error adding article: " + err.message));
   },
 
-  // Helper function to map categoryId to categoryName
-  mapCategoryNames: function (articles) {
-    return articles.map((article) => {
-      const category = categories.find((cat) => cat.id === article.categoryId);
-      return {
-        ...article,
-        categoryName: category ? category.name : "Unknown Category", // Default if not found
-      };
-    });
-  },
-
+  // Fetch articles by category
   getArticlesByCategory: function (category) {
-    const filteredArticles = articles.filter(
-      (article) => article.category === category
-    );
-    return filteredArticles.length > 0 ? filteredArticles : [];
+    return pool
+      .query("SELECT * FROM articles WHERE category_id = $1", [category])
+      .then((res) => res.rows)
+      .catch((err) =>
+        Promise.reject("No articles found for category: " + category)
+      );
   },
 
+  // Fetch articles by date
   getArticlesByMinDate: function (minDateStr) {
     const minDate = new Date(minDateStr);
-    const filteredArticles = articles.filter(
-      (article) => new Date(article.articleDate) >= minDate
-    );
-    return filteredArticles.length > 0 ? filteredArticles : [];
+    return pool
+      .query("SELECT * FROM articles WHERE article_date >= $1", [minDate])
+      .then((res) => res.rows)
+      .catch((err) => Promise.reject("No articles found after the given date"));
   },
 
+  // Fetch a single article by its ID
   getArticleById: function (id) {
-    return new Promise((resolve, reject) => {
-      const foundArticle = articles.find((article) => article.id == id);
-      if (foundArticle) {
-        const articleWithCategory = {
-          ...foundArticle,
-          categoryName:
-            categories.find((cat) => cat.id === foundArticle.categoryId)
-              ?.name || "Unknown Category",
-        };
-        resolve(articleWithCategory); // Resolve with the article including categoryName
-      } else {
-        reject("Article not found"); // Reject with a message if not found
-      }
-    });
+    return pool
+      .query("SELECT * FROM articles WHERE id = $1", [id])
+      .then((res) => {
+        if (res.rows.length > 0) {
+          return pool
+            .query("SELECT name FROM categories WHERE id = $1", [
+              res.rows[0].category_id,
+            ])
+            .then((catRes) => ({
+              ...res.rows[0],
+              categoryName:
+                catRes.rows.length > 0
+                  ? catRes.rows[0].name
+                  : "Unknown Category",
+            }));
+        } else {
+          return Promise.reject("Article not found");
+        }
+      })
+      .catch((err) => Promise.reject("Error fetching article: " + err.message));
   },
 
+  // Fetch all articles
   getAllArticles: function () {
-    return new Promise((resolve, reject) => {
-      if (articles.length > 0) {
-        resolve(articles); // Resolve with the array of articles
-      } else {
-        reject(new Error("No articles found")); // Reject if no articles are available
-      }
-    });
+    return pool
+      .query("SELECT * FROM articles")
+      .then((res) => res.rows)
+      .catch((err) => Promise.reject("No articles found"));
+  },
+
+  updateArticle: async (id, articleData) => {
+    const { title, content, author, featureImage, category } = articleData;
+
+    try {
+      const query = `
+        UPDATE articles
+        SET title = $1, content = $2, author = $3, featureImage = $4, category = $5
+        WHERE id = $6;
+      `;
+
+      const values = [title, content, author, featureImage, category, id];
+      await pool.query(query, values);
+    } catch (err) {
+      console.error("Error updating article:", err.message);
+      throw err;
+    }
+  },
+
+  deleteArticle: async (id) => {
+    try {
+      const query = `DELETE FROM articles WHERE id = $1;`;
+      await pool.query(query, [id]);
+    } catch (err) {
+      console.error("Error deleting article:", err.message);
+      throw err;
+    }
   },
 };

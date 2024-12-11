@@ -1,9 +1,9 @@
-# CMS Web Blog by MD ARAFAT KOYES Assignment 4 WEB322
+# CMS Web Blog by MD ARAFAT KOYES Assignment 5 WEB322
 makoyes 
 
 
-This is a simple Content Management System (CMS) web application built with **Node.js**, **Express**, and **Bootstrap 5**. It features basic routes for handling articles and categories and serves static files like HTML, CSS, and images.
-Live Link: https://vercel.com/arafdewanns-projects/cm-sproject
+This is a simple Content Management System (CMS) web application built with **Node.js**, **Express**, and **Bootstrap 5**. It features basic routes for handling articles and categories and serves static files like HTML, CSS, and images. ejs
+Live Link: https://web322-assignments-git-main-arafdewanns-projects.vercel.app/
 
 ## Features
 
@@ -29,6 +29,10 @@ https://vercel.live/link/web322-assignments-git-main-arafdewanns-projects.vercel
 AS3: https://vercel.com/arafdewanns-projects/cm-sproject
 https://cm-sproject-arafdewanns-projects.vercel.app/
 https://cm-sproject-git-main-arafdewanns-projects.vercel.app/
+
+AS4: https://web322-assignments-amber.vercel.app/
+https://web322-assignments-arafdewanns-projects.vercel.app/
+https://web322-assignments-git-main-arafdewanns-projects.vercel.app/
 
 ### Technology Stack
 

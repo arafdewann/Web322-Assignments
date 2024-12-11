@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Articles</title>
+    <title>Categories</title>
     <link rel="icon" type="image/png" href="CONTENT.png" />
     <!-- Bootstrap 5 CSS -->
     <link
@@ -35,13 +35,13 @@
               <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/articles">Articles</a>
+              <a class="nav-link" href="/articles">Articles</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/articles/add">Add Article</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/categories">Categories</a>
+              <a class="nav-link active" href="/categories">Categories</a>
             </li>
           </ul>
         </div>
@@ -49,76 +49,26 @@
     </nav>
 
     <main class="container my-5">
-      <h1 class="text-center mb-4">Articles</h1>
+      <h1 class="text-center mb-4">Categories</h1>
 
-      <% if (error) { %>
-      <div class="alert alert-warning text-center" role="alert">
-        <%= error %>
-      </div>
-      <% } %> <% if (article) { %>
-      <div class="article-details">
-        <h2><%= article.title %></h2>
-        <p><%= article.content %></p>
-        <p><strong>Author:</strong> <%= article.author %></p>
-        <p>
-          <strong>Category:</strong> <%= article.categoryName || 'Uncategorized'
-          %>
-        </p>
-      </div>
-      <% } else if (articles && articles.length > 0) { %>
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
           <thead class="table-dark">
             <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Category</th>
-              <th>Actions</th>
+              <th>Name</th>
+              <th>Description</th>
             </tr>
           </thead>
           <tbody>
-            <% articles.forEach(article => { %>
+            <% categories.forEach(category => { %>
             <tr>
-              <td><%= article.title %></td>
-              <td><%= article.author %></td>
-              <td><%= article.category || 'Uncategorized' %></td>
-              <td>
-                <a
-                  href="/articles/<%= article.id %>"
-                  class="btn btn-primary btn-sm"
-                  >Read</a
-                >
-              </td>
-              <td>
-                <a
-                  href="/articles/<%= article.id %>"
-                  class="btn btn-primary btn-sm"
-                  >Read</a
-                >
-                <a
-                  href="/articles/edit/<%= article.id %>"
-                  class="btn btn-warning btn-sm"
-                  >Edit</a
-                >
-                <form
-                  action="/articles/delete/<%= article.id %>"
-                  method="POST"
-                  style="display: inline"
-                  onsubmit="return confirm('Are you sure you want to delete this article?');"
-                >
-                  <button type="submit" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
-                </form>
-              </td>
+              <td><%= category.name %></td>
+              <td><%= category.description %></td>
             </tr>
             <% }); %>
           </tbody>
         </table>
       </div>
-      <% } else { %>
-      <p class="text-center">No articles available.</p>
-      <% } %>
     </main>
 
     <footer class="bg-dark-blue text-white text-center py-3">

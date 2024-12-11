@@ -1,13 +1,13 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const app = express();
-const port = 3243;
 const contentService = require("./content-service");
-
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const streamifier = require("streamifier");
+
+const app = express();
+const port = 3243;
 
 cloudinary.config({
   cloud_name: "dpy8pnzaq",
@@ -18,7 +18,8 @@ cloudinary.config({
 
 const upload = multer();
 
-app.set("view engine", "ejs"); // Set EJS as the view engine
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -28,7 +29,7 @@ contentService
   .then(() => {
     console.log("Content service initialized");
 
-    // Serve 'about' page using EJS
+    // Serve the 'about' page using EJS
     app.get("/", (req, res) => {
       res.render("about"); // Renders views/about.ejs
     });
@@ -37,130 +38,31 @@ contentService
       res.render("about"); // Renders views/about.ejs
     });
 
-    // Update the route to pass categories to the template
+    // Display the add article form
     app.get("/articles/add", (req, res) => {
       const categoriesFilePath = path.join(
         __dirname,
         "data",
         "categories.json"
-      ); // Update path if necessary
+      );
 
-      console.log("Reading categories from:", categoriesFilePath); // Log the path
-
-      // Read categories from categories.json
       fs.readFile(categoriesFilePath, "utf8", (err, data) => {
         if (err) {
-          console.error("Error reading categories.json:", err); // Log the error
+          console.error("Error reading categories.json:", err);
           return res.status(500).send("Error loading categories.");
         }
 
         try {
-          // Parse the categories from the JSON file
           const categories = JSON.parse(data);
-
-          // Render the AddArticle form with the categories
           res.render("addArticle", { categories });
         } catch (jsonErr) {
-          console.error("Error parsing categories.json:", jsonErr); // Log JSON parse errors
+          console.error("Error parsing categories.json:", jsonErr);
           return res.status(500).send("Error parsing categories.");
         }
       });
     });
 
     // Handle form submission to add a new article
-    // app.post(
-    //   "/articles/add",
-    //   upload.single("featureImage"),
-    //   async (req, res) => {
-    //     try {
-    //       // Upload feature image to Cloudinary (if provided)
-    //       const imageUrl = req.file
-    //         ? (await cloudinary.uploader.upload(req.file.buffer)).url
-    //         : "";
-
-    //       // Add image URL to the body of the form submission
-    //       req.body.featureImage = imageUrl;
-
-    //       // Auto-generate article ID here (e.g., the next available ID)
-    //       req.body.id = contentService.getNextArticleId(); // Ensure getNextArticleId() is defined in contentService
-
-    //       // Add the article to your service or database
-    //       await contentService.addArticle(req.body);
-
-    //       // Redirect to the list of articles after adding the new article
-    //       res.redirect("/articles");
-    //     } catch (err) {
-    //       res
-    //         .status(500)
-    //         .json({ message: "Error occurred", error: err.message });
-    //     }
-    //   }
-    // );
-
-    // Article retrieval and filtering routes
-    // app.get("/articles", (req, res) => {
-    //   const { category, minDate } = req.query;
-
-    //   if (category) {
-    //     contentService
-    //       .getArticlesByCategory(category)
-    //       .then((articles) => {
-    //         res.render("articles", { articles, error: null });
-    //       })
-    //       .catch((err) => {
-    //         res.render("articles", {
-    //           articles: [],
-    //           error: "Error fetching articles",
-    //         });
-    //       });
-    //   } else if (minDate) {
-    //     contentService
-    //       .getArticlesByMinDate(minDate)
-    //       .then((articles) => {
-    //         res.render("articles", { articles, error: null });
-    //       })
-    //       .catch((err) => {
-    //         res.render("articles", {
-    //           articles: [],
-    //           error: "Error fetching articles",
-    //         });
-    //       });
-    //   } else {
-    //     contentService
-    //       .getAllArticles()
-    //       .then((articles) => {
-    //         res.render("articles", { articles, error: null });
-    //       })
-    //       .catch((err) => {
-    //         res.render("articles", {
-    //           articles: [],
-    //           error: "Error fetching articles",
-    //         });
-    //       });
-    //   }
-    // });
-
-    // Route to display a single article
-    // app.get("/articles/:id", (req, res) => {
-    //   const articleId = req.params.id;
-
-    //   contentService
-    //     .getArticleById(articleId)
-    //     .then((article) => {
-    //       // Map the article to include categoryName using mapCategoryNames helper
-    //       const articleWithCategory = contentService.mapCategoryNames([
-    //         article,
-    //       ])[0]; // Wrap article in an array to use map function
-
-    //       // Render the article with categoryName in 'articles.ejs'
-    //       res.render("articles", { article: articleWithCategory });
-    //     })
-    //     .catch((err) => {
-    //       console.error("Error fetching article:", err);
-    //       res.status(404).send("Article not found");
-    //     });
-    // });
-
     app.post(
       "/articles/add",
       upload.single("featureImage"),
@@ -168,31 +70,24 @@ contentService
         try {
           let imageUrl = "";
 
-          // Upload feature image to Cloudinary (if provided)
           if (req.file) {
             imageUrl = await new Promise((resolve, reject) => {
               const uploadStream = cloudinary.uploader.upload_stream(
                 (error, result) => {
                   if (result) {
-                    resolve(result.url); // Get the image URL from Cloudinary
+                    resolve(result.url);
                   } else {
                     reject(error);
                   }
                 }
               );
-
-              // Pipe the buffer to the upload stream
               streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
             });
           }
 
-          // Add image URL to the body of the form submission
           req.body.featureImage = imageUrl;
 
-          // Add the article to your service or database
-          const newArticle = contentService.addArticle(req.body);
-
-          // Redirect to the list of articles after adding the new article
+          const newArticle = await contentService.addArticle(req.body);
           res.redirect("/articles");
         } catch (err) {
           res
@@ -202,6 +97,7 @@ contentService
       }
     );
 
+    // List all articles
     app.get("/articles", (req, res) => {
       contentService
         .getAllArticles()
@@ -217,35 +113,43 @@ contentService
         });
     });
 
-    app.get("/articles/:id", (req, res) => {
-      const articleId = req.params.id;
-
-      contentService
-        .getArticleById(articleId)
-        .then((article) => {
-          const articleWithCategory = contentService.mapCategoryNames([
-            article,
-          ])[0];
-          res.render("articles", {
-            article: articleWithCategory,
-            articles: null,
-            error: null,
-          });
-        })
-        .catch((err) => {
-          res.status(404).send("Article not found");
+    // Route for fetching an article by ID
+    app.get("/articles/:id", async (req, res) => {
+      const id = parseInt(req.params.id, 10); // Ensure the ID is an integer
+      if (isNaN(id)) {
+        return res.status(400).render("articles", {
+          error: "Invalid article ID",
+          articles: [],
+          article: null,
         });
-    });
+      }
 
-    app.set("views", path.join(__dirname, "views")); // Ensure this points to your views directory
-    app.set("view engine", "ejs"); // Adjust if you're using another engine like pug
+      try {
+        const article = await contentService.getArticleById(id);
+        if (!article) {
+          return res.render("articles", {
+            article: null,
+            error: "Article not found",
+            articles: [],
+          });
+        }
+        res.render("articles", { article, error: null, articles: [] });
+      } catch (err) {
+        console.error(err);
+        res.status(500).render("articles", {
+          article: null,
+          error: "Error fetching article",
+          articles: [],
+        });
+      }
+    });
 
     // Categories route
     app.get("/categories", (req, res) => {
       contentService
         .getCategories()
         .then((categories) => {
-          res.render("categories", { categories }); // Render categories.ejs
+          res.render("categories", { categories });
         })
         .catch((err) => {
           res.status(500).render("error", {
@@ -255,6 +159,84 @@ contentService
         });
     });
 
+    // Update an article form
+    app.get("/articles/edit/:id", async (req, res) => {
+      const id = parseInt(req.params.id, 10);
+      if (isNaN(id)) {
+        return res.status(400).send("Invalid article ID.");
+      }
+
+      try {
+        const article = await contentService.getArticleById(id);
+        const categoriesFilePath = path.join(
+          __dirname,
+          "data",
+          "categories.json"
+        );
+        const categories = JSON.parse(
+          fs.readFileSync(categoriesFilePath, "utf8")
+        );
+        res.render("editArticle", { article, categories });
+      } catch (err) {
+        res.status(500).send("Error retrieving article for editing.");
+      }
+    });
+
+    // Handle updating an article
+    app.post(
+      "/articles/edit/:id",
+      upload.single("featureImage"),
+      async (req, res) => {
+        const id = parseInt(req.params.id, 10);
+        if (isNaN(id)) {
+          return res.status(400).send("Invalid article ID.");
+        }
+
+        try {
+          let imageUrl = req.body.featureImage || "";
+
+          if (req.file) {
+            imageUrl = await new Promise((resolve, reject) => {
+              const uploadStream = cloudinary.uploader.upload_stream(
+                (error, result) => {
+                  if (result) {
+                    resolve(result.url);
+                  } else {
+                    reject(error);
+                  }
+                }
+              );
+              streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
+            });
+          }
+
+          req.body.featureImage = imageUrl;
+          await contentService.updateArticle(id, req.body);
+          res.redirect("/articles");
+        } catch (err) {
+          console.error("Error updating the article:", err);
+          res.status(500).send("Error updating the article.");
+        }
+      }
+    );
+
+    // Delete an article
+    app.post("/articles/delete/:id", async (req, res) => {
+      const id = parseInt(req.params.id, 10);
+      if (isNaN(id)) {
+        return res.status(400).send("Invalid article ID.");
+      }
+
+      try {
+        await contentService.deleteArticle(id);
+        res.redirect("/articles");
+      } catch (err) {
+        console.error("Error deleting the article:", err);
+        res.status(500).send("Error deleting the article.");
+      }
+    });
+
+    // Start the server
     app.listen(port, () => {
       console.log(`Express http server listening on port ${port}`);
     });
