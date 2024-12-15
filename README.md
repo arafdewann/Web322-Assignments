@@ -1,5 +1,4 @@
 # CMS Web Blog by MD ARAFAT KOYES Assignment 5 WEB322
-makoyes 
 
 
 This is a simple Content Management System (CMS) web application built with **Node.js**, **Express**, and **Bootstrap 5**. It features basic routes for handling articles and categories and serves static files like HTML, CSS, and images. ejs
@@ -17,8 +16,8 @@ Live Link: https://web322-assignments-git-main-arafdewanns-projects.vercel.app/
 # Web322 Assignment
 
 Student Name:  MD ARAFAT KOYES
-- Student Number:  133682229
-- Student Email:  makoyes@myseneca.ca
+- Student Number:  XXXXXX
+- Student Email:  XXXXXX
 Date Created:  
 
 GITHUB URL:  https://github.com/arafdewann/Web322-Assignments
